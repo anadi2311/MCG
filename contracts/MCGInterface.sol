@@ -1,8 +1,8 @@
-    pragma solidity ^0.5.0;
+pragma solidity ^0.5.0;
 
 contract MCGInterface{
     
-    function registerCompany( string calldata _companyName,  uint _identificationNumber, string calldata _location, string calldata _scRole) external returns(bool success);
+    function registerCompany( string calldata _companyName,  uint _identificationNumber, string calldata _location, string calldata _scRole) external;
     
     function getYourCompany() external view returns(
         uint companyId,
@@ -11,15 +11,26 @@ contract MCGInterface{
         uint identificationNumber,
         string memory location,
         bool isApprovedByAdmin,
-        string memory scRole // don't really need scRole
+        string memory scRole // doesn't really need scRole
         );
     
     function registerAirport( string calldata _airportName, string calldata _airportLocation, address _airportOwner)  external  returns(bool success);
+    
     function approveCompany (uint _companyId) external  returns(bool success);
+    
     function registerVaccine( string calldata _vaccineName, uint _vaccinePrice, uint _threshLowestTemp, uint _threshHighestTemp, uint _thresHumidity, uint _HSTarriffNumber) external;
+    
     function produceVaccine( uint _vaccineId, uint _amount) external returns(bool success);
+    
+    function getVaccineInventory(uint vaccineId) external returns( 
+    uint currentInventory,
+    uint totalBatchesProduced);
+
+    function getBatchDetail( uint _orderId) external view returns(
+    uint[] memory batchId);
 
     function makePurchaseOrder( uint _vaccineId, uint _numberOfContainers)  external;
+
     function getPurchaseOrder( uint _orderId) external view returns(
         uint vaccineId,
         uint orderId,
@@ -28,6 +39,7 @@ contract MCGInterface{
         address order
     );
     function acceptOrder (uint _orderId) external;  
+
     function getInvoice( uint _orderId) external view returns(
         uint invoiceId,
         uint orderId,
@@ -36,7 +48,9 @@ contract MCGInterface{
         bool isInvoicePayed,
         uint timeOfInvoiceGeneration
         );      
+        
     function initiateShipment (uint _orderId, uint _carrierId, uint _exportAirportId, uint _destinationAirportId) external;  
+
     function getContainer( uint _containerId)external view returns (
         uint containerId,
         uint orderId,
@@ -80,9 +94,14 @@ contract MCGInterface{
         bool isApprovedByImportCustoms
         );
     function RequestPickUp(uint _orderId) external returns(bool success);
+    
     function approveExport(uint _containerId) external returns(bool success); 
+    
     function approveImport(uint _containerId, uint _warehouseId) external returns(bool success);
+    
     function TransportContainerFromAirport(uint _orderId, uint _carrierId) external;
+    
     function approveDelivery(uint _orderId) external returns (bool success);
+    
     function makePayment( uint _invoiceId) external payable returns (bool success);
 }

@@ -1,6 +1,6 @@
-export const GATEWAY = 'METAMASK' // Either 'METAMASK' or 'GANACHE'
+export const GATEWAY = 'GANACHE' // Either 'METAMASK' or 'GANACHE'
 
-export const CONTRACT_ADDRESS = '0xE4f10297700b15776e5caF70D5Cd025918839af3'
+export const CONTRACT_ADDRESS = '0xD06F0019c595cA30F1Be62fA2a92dC6b2B50C808'
 
 export const CONTRACT_ABI = [
     {
@@ -190,6 +190,25 @@ export const CONTRACT_ABI = [
       "type": "event"
     },
     {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "companyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "companyOwner",
+          "type": "address"
+        }
+      ],
+      "name": "companyRegistered",
+      "type": "event"
+    },
+    {
       "constant": true,
       "inputs": [],
       "name": "adminAddress",
@@ -313,32 +332,6 @@ export const CONTRACT_ABI = [
           "internalType": "uint256",
           "name": "",
           "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "orderToContainers",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
         }
       ],
       "name": "vaccines",
@@ -398,15 +391,9 @@ export const CONTRACT_ABI = [
         }
       ],
       "name": "makePayment",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "success",
-          "type": "bool"
-        }
-      ],
+      "outputs": [],
       "payable": true,
       "stateMutability": "payable",
       "type": "function"
     }
-]    
+  ]
